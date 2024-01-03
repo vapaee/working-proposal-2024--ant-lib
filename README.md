@@ -67,3 +67,6 @@ This is the list of features to be included:
 
 The final delivery, scheduled for early March, will include the fully completed library and a functional example application.
 
+## Conclusion
+
+This Ant proposal represents a significant advancement in the efficiency of application development on Telos. By centralizing the effort and standardizing processes, we will not only ease our team's workload but also attract more developers to our community, enhancing innovation and collaboration within the Telos ecosystem
