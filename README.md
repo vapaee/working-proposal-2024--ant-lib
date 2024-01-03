@@ -1,6 +1,6 @@
-<center>
-![Texto alternativo](img/ant-logo-white-small.png)
-</center>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/vapaee/working-proposal-2024--ant-lib/main/img/ant-logo-white-small.png" alt="Texto alternativo">
+</p>
 
 
 # Proposal Summary
