@@ -41,7 +41,7 @@ The initial goal is to finalize the library's first version, offering complete s
 This is the list of features to be implemented:
 - **Config file**: A customizable list of blockchains with their respective data (currency, explorer, URLs, main contracts, etc).
 - **Module Manager**: Developers can implement their modules, publish them as npm packages, and make them reusable by others.
-- **Multichain support**: Users can maintain multiple connections simultaneously with different accounts and blockchains, keeping data synchronized across all.
+- **Multi Session Support**: Users can maintain multiple connections simultaneously with different accounts and blockchains, keeping data synchronized across all.
 - **Source and Docs**: A new independent repository with open-source code and complete documentation.
 - **Tests**: Unit tests to test the application and a set of Mocks to facilitate the creation of new tests using this library.
 - **NPM package**: publish the first version of the library as a standalone package on npm repositories
