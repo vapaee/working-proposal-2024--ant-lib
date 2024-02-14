@@ -1,0 +1,12 @@
+{
+    "license": "MIT",
+    "scripts": {
+        "install:telosjs": "cd telosjs && yarn",
+        "install:telos-cloud": "cd telos-cloud && yarn",
+        "install:vue-ts": "cd examples/vue-ts && rm node_modules -fr; yarn;",
+        "install:all": "install:telos-cloud && yarn install:vue-ts",
+        "dev:vue-ts": "cd examples/vue-ts && rm node_modules -fr; yarn; yarn dev;",
+        "dev": "yarn install:telos-cloud && yarn dev:vue-ts"
+    }
+  }
+  

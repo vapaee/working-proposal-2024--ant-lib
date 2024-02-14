@@ -1,0 +1,26 @@
+{
+  "name": "@vapaee/telosjs",
+  "version": "0.0.11",
+  "description": "Telos blockchain easy as never before",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "copy-version": "node scripts/copy_version.js",
+    "copy-styles": "rm dist/styles -fr; cp -R styles dist",
+    "build": "yarn copy-version; yarn copy-styles; tsc",
+    "test": "jest",
+    "prepublish": "yarn run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "rxjs": "^7.8.1"
+  }
+}
