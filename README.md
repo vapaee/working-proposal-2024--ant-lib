@@ -5,7 +5,7 @@
 
 # Proposal Summary
 
-This proposal aims to develop **Ant**, a configurable library designed to simplify and centralize all necessary code for interacting with the Telos blockchain via a Vue-based web app. This tool will enable developers to focus solely on their applications' specific aspects, delegating the inherent complexity of blockchain communication to **Ant**
+This proposal aims to develop **Ant**, a configurable typescript library designed to simplify and centralize all necessary code for interacting with the Telos blockchain. This tool will enable developers to focus solely on their applications' specific aspects, delegating the inherent complexity of blockchain communication to **Ant**
 
 Moreover, **Ant** will not be limited to Telos but will support any blockchain within the Antelope family and Ethereum-compatible blockchains (EVM), with a particular emphasis on Telos. For data synchronization, this library will rely heavily on the Telos indexer, but it will also have secondary mechanisms (fallbacks) to ensure minimum support for each network in this ecosystem in case the indexer is down or unavailable for the network.
 
@@ -41,7 +41,7 @@ The initial goal is to finalize the library's first version, offering complete s
 This is the list of features to be implemented:
 - **Config file**: A customizable list of blockchains with their respective data (currency, explorer, URLs, main contracts, etc).
 - **Module Manager**: Developers can implement their modules, publish them as npm packages, and make them reusable by others.
-- **Multichain support**: Users can maintain multiple connections simultaneously with different accounts and blockchains, keeping data synchronized across all.
+- **Multi-Session Support**: Users can maintain multiple connections simultaneously with different accounts and blockchains, keeping data synchronized across all.
 - **Source and Docs**: A new independent repository with open-source code and complete documentation.
 - **Tests**: Unit tests to test the application and a set of Mocks to facilitate the creation of new tests using this library.
 - **NPM package**: publish the first version of the library as a standalone package on npm repositories
