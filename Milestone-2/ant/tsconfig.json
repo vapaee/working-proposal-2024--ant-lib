@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "lib": [ "es2015", "dom" ],
+      // "target": "es6", // Buen equilibrio de compatibilidad y características modernas
+      // "module": "esnext", // Para permitir el uso de sintaxis de módulos ES más moderna
+      // "lib": ["dom", "esnext"], // Incluye tipos para el DOM y características ES más recientes
+      "declaration": true, // Genera archivos .d.ts para usuarios de TypeScript
+      "outDir": "./dist", // Directorio de salida para el código compilado
+      "moduleResolution": "node", // Uso de la resolución de módulos al estilo Node.js
+      "esModuleInterop": true, // Permite la importación de módulos CommonJS de forma más natural
+      "strict": true, // Habilita todas las opciones estrictas
+      "skipLibCheck": true, // Omite la comprobación de tipos en archivos de declaración de las bibliotecas para acelerar la compilación
+      "sourceMap": true, // Genera archivos de mapa de fuente para depuración
+      "allowSyntheticDefaultImports": true // Permite importaciones por defecto desde módulos sin un export por defecto
+    },
+    "include": ["src/**/*"], // Incluye todos los archivos TypeScript en src
+    "exclude": ["node_modules", "**/*.spec.ts"] // Excluye node_modules y archivos de pruebas
+  }
+  

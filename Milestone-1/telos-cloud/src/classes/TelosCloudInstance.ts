@@ -4,7 +4,8 @@ import { GoogleCredentials, version } from '..';
 import { Subject, Subscription } from 'rxjs';
 import { MetakeepAuthenticator } from './MetakeepUAL';
 import { initFuelUserWrapper } from './GraymassFuel';
-import { User } from './ual';
+// import { User } from './ual';
+import { User } from 'universal-authenticator-library';
 
 const TELOS_CLOUD_LOGGED_USER = 'telos-cloud.logged';
 
@@ -102,20 +103,23 @@ export class TelosCloudInstance {
             const ualUsers = await this.auth.login();
             if (ualUsers?.length) {
                 const useFuel = this.config?.fuel;
-                this.user = useFuel ? await initFuelUserWrapper(ualUsers[0], useFuel) : ualUsers[0];
-                const permission = (this.user as unknown as { requestPermission: string })
+                const user = useFuel ? await initFuelUserWrapper(ualUsers[0], useFuel) : ualUsers[0];
+                if (user) {
+                    this.user = user
+                    const permission = (this.user as unknown as { requestPermission: string })
                     .requestPermission ?? 'active';
-                const account = await this.user.getAccountName();
-                const email= credentials.email;
-                const keys = await this.user.getKeys();
-                this.logged = {
-                    account,
-                    permission,
-                    email,
-                    keys,
-                };
-                this.saveLoggedUser();
-                this.onLogin.next();
+                    const account = await this.user.getAccountName();
+                    const email= credentials.email;
+                    const keys = await this.user.getKeys();
+                    this.logged = {
+                        account,
+                        permission,
+                        email,
+                        keys,
+                    };
+                    this.saveLoggedUser();
+                    this.onLogin.next();
+                }
             } else {
                 throw new Error('MetakeepAuthenticator login failed');
             }

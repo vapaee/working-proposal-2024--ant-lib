@@ -1,1 +1,1 @@
-export const version = process.env.VERSION as string;
+export const version = '0.9.0';

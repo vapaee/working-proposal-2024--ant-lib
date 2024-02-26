@@ -1,0 +1,14 @@
+{
+    "license": "MIT",
+    "scripts": {
+        "build-ant": "cd ant && yarn && yarn build",
+        "reinstall-example": "cd examples/vue-ts-ant && yarn install --force",
+        "watch-ant": "nodemon --watch ant/src --ext ts,js,json --exec \"yarn build-ant && yarn reinstall-example\"",
+        "dev": "yarn build-ant && concurrently \"yarn watch-ant\" \"yarn reinstall-example && cd examples/vue-ts-ant && yarn dev\""
+    },
+    "devDependencies": {
+        "concurrently": "^6.0.0",
+        "nodemon": "^2.0.0"
+    }
+}
+  

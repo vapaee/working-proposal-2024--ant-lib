@@ -1,0 +1,1 @@
+{"version":3,"file":"AntelopeError.js","sourceRoot":"","sources":["../../src/types/AntelopeError.ts"],"names":[],"mappings":";;;AAIA,MAAa,aAAc,SAAQ,KAAK;IAEpC,YACI,OAA2B,EACpB,QAAkB;QAEzB,KAAK,CAAC,OAAO,CAAC,CAAC;QAFR,aAAQ,GAAR,QAAQ,CAAU;QAGzB,IAAI,QAAQ,EAAE,CAAC;YACX,IAAI,CAAC,OAAO,GAAG,QAAoC,CAAC;QACxD,CAAC;IACL,CAAC;CACJ;AAXD,sCAWC"}

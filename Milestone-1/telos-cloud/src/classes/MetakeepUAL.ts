@@ -9,7 +9,8 @@ import { MetaKeep } from 'metakeep';
 import axios from 'axios';
 import { APIClient, NameType, PackedTransaction, Serializer, Transaction } from '@greymass/eosio';
 import { metakeepCache } from './MetakeepCache';
-import { User } from './ual';
+// import { User } from './ual';
+import { User } from 'universal-authenticator-library';
 
 export interface UserCredentials {
     email: string;

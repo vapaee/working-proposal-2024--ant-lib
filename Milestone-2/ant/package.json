@@ -1,0 +1,47 @@
+{
+    "name": "@vapaee/ant",
+    "version": "0.0.2",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "/dist"
+    ],
+    "license": "MIT",
+    "scripts": {
+        "prebuild": "node scripts/copy_version.js",
+        "build": "tsc",
+        "build-1": "tsc && tsc -m es6 --outDir dist/ant-esm && webpack --mode production",
+        "build-2": "tsc && tsc -m es6 --outDir dist/ant-esm ",
+        "dev": "webpack --mode development --watch",
+        "test": "jest",
+        "prepublish": "yarn run build"
+    },
+    "devDependencies": {
+        "@types/bn.js": "^5.1.5",
+        "@types/jest": "^29.5.12",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.2",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.3.3",
+        "webpack": "^5.90.2",
+        "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "@greymass/eosio": "^0.7.0",
+        "axios": "^1.6.7",
+        "metakeep": "^2.2.1",
+        "rxjs": ">=6.0.0",
+        "ethers": "^5.5.1",
+        "decimal.js": "^10.4.3",
+        "universal-authenticator-library": "^0.3.0"
+    },
+    "peerDependencies": {
+        "@greymass/eosio": "^0.7.0",
+        "axios": "^1.6.7",
+        "metakeep": "^2.2.1",
+        "rxjs": ">=6.0.0",
+        "ethers": "^5.5.1",
+        "decimal.js": "^10.4.3",
+        "universal-authenticator-library": ">=0.3.0"
+    }
+}

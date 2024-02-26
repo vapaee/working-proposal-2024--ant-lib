@@ -531,16 +531,8 @@
   dependencies:
     "@types/node" "*"
 
-"@vapaee/telos-cloud@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@vapaee/telos-cloud/-/telos-cloud-0.9.0.tgz#f82a9b0e87660c43d6ab7fd61327ee6603067aca"
-  integrity sha512-naKoCWH8Dvccne5ZOKb/Boo2x4jCk+jsn1+GWwJzVSKx2wNKSuXMqFdSLrkvUtmhX5V2+KInNOJTNM7lnxxseQ==
-  dependencies:
-    "@greymass/eosio" "^0.7.0"
-    axios "^1.6.7"
-    metakeep "^2.2.1"
-    rxjs ">=6.0.0"
-    universal-authenticator-library "^0.3.0"
+"@vapaee/telos-cloud@file:../../telos-cloud/dist":
+  version "0.0.0"
 
 "@vue/cli-overlay@^5.0.8":
   version "5.0.8"
@@ -3911,7 +3903,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rxjs@>=6.0.0, rxjs@^7.8.1:
+rxjs@^7.8.1:
   version "7.8.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==

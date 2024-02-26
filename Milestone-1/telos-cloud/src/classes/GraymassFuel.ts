@@ -12,7 +12,8 @@ import {
     Serializer,
     Transaction,
 } from '@greymass/eosio';
-import { User } from './ual';
+// import { User } from './ual';
+import { User } from 'universal-authenticator-library';
 
 export interface FuelUserWrapperConfig {
     rpcEndpoint: string,
@@ -133,14 +134,14 @@ class FuelUserWrapper extends User {
             const rpResponse = await cosigned.json(); /*as ResourceProviderResponse*/
             console.log('FuelUserWrapper.signTransaction() rpResponse:', rpResponse);
             switch (rpResponse.code) {
-            case 402: {
-            // Resource Provider provided signature in exchange for a fee
-            // is ok to treat them with the same logic of code = 200?
-            // Yes according to this: https://gist.github.com/aaroncox/d74a73b3d9fbc20836c32ea9deda5d70#file-fuel-core-presign-js-L128-L159
-            // Aron rightly suggests that we should show and confirm the fee costs for this service:
-            // https://github.com/telosnetwork/open-block-explorer/pull/477#discussion_r1053417964
-            }
-            case 200: {
+            case 402:
+                // Resource Provider provided signature in exchange for a fee
+                // is ok to treat them with the same logic of code = 200?
+                // Yes according to this: https://gist.github.com/aaroncox/d74a73b3d9fbc20836c32ea9deda5d70#file-fuel-core-presign-js-L128-L159
+                // Aron rightly suggests that we should show and confirm the fee costs for this service:
+                // https://github.com/telosnetwork/open-block-explorer/pull/477#discussion_r1053417964
+                
+            case 200: 
             // Resource Provider provided signature for free
 
                 const { data } = rpResponse;
@@ -182,11 +183,11 @@ class FuelUserWrapper extends User {
                 };
 
                 return Promise.resolve(finalResponse);
-            }
-            case 400: {
+            
+            case 400: 
             // Resource Provider refused to sign the transaction, aborting
                 break;
-            }
+            
             default:
                 throw (
                     'Code ' +
