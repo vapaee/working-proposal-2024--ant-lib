@@ -28,10 +28,6 @@ export class TelosCloud {
         telosCloud.checkAutoLogin();
     }
 
-    // async login(): Promise<string> {
-    //     return telosCloud.login();
-    // }
-
     reset() {
         console.log("TelosCloud.reset()");
         telosCloud.reset();

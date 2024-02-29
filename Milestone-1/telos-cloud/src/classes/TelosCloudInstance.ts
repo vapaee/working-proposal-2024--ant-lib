@@ -19,7 +19,7 @@ export class TelosCloudInstance {
     logged: TelosCloudLoggedUser | null = null;
     
     constructor() {
-        console.log('TelosCloudInstance.constructor()');
+        console.log('TelosCloudInstance.constructor()', this.version);
         this.googleSubscription = googleCtrl.onSuccessfulLogin.subscribe({
             next: (data) => {
                 if (data) {
@@ -50,19 +50,32 @@ export class TelosCloudInstance {
         this.auth = new MetakeepAuthenticator([chain], {
             appName: config.appName,
             appId: config.metakeep.appId,
-            accountCreateAPI: config.metakeep.accountCreateAPI,
+            accountCreateAPI: config.accountCreation?.rpcEndpoint,
         });
+
+        if (config.accountCreation && config.accountCreation.allowRedirect) {
+            this.auth.setAccountCreateCallback(() => {
+                return new Promise(() => {
+                    // save a partial state of logged
+                    this.logged = {
+                        account: '',
+                        permission: '',
+                        email: '',
+                        keys: [],
+                    };
+                    this.saveLoggedUser();
+                    // we redirect the user to the login page
+                    const current_url = window.location.href;
+                    window.open(`https://deploy-preview-782--wallet-develop-mainnet.netlify.app/?redirect=${current_url}`, '_self');
+                });
+            });
+        }
     }
 
     reset() {
         console.log('TelosCloudInstance.reset()');
         this.init(this.config as TelosCloudOptions);
     }
-
-    // get network() {
-    //     switch (this.config?.chain.chainId) {
-    //         // 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11 -> mainnet
-    // }
 
     performTelosCloudLogin(data: GoogleCredentials) {
         console.log('TelosCloudInstance.performTelosCloudLogin() data:', data);
@@ -84,10 +97,27 @@ export class TelosCloudInstance {
         console.log('TelosCloudInstance.checkAutoLogin() data:', data, this.logged);
         if (!this.logged && data) {
             this.logged = JSON.parse(data);
-            if (this.logged) {
+        }
+
+        const url = new URL(window.location.href);
+        const account = url.searchParams.get('account');
+        const email = url.searchParams.get('email');
+        if (account && email) {
+            this.logged = {
+                account,
+                email,
+                permission: 'active',
+                keys: [],
+            };
+            this.saveLoggedUser();
+        }
+
+        if (this.logged) {
+            if (this.logged.email && this.logged.account) {
                 const credentials = {
                     email: this.logged.email,
                     jwt: '',
+                    account: this.logged.account,
                 }
                 this.performTelosCloudLogin(credentials);
             }

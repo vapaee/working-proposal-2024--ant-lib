@@ -1,11 +1,10 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { TelosCloud } from '@vapaee/telos-cloud';
-
 import NavegationBar from '@/components/NavegationBar.vue';
 
 export default defineComponent({
-    name: 'TelosCloudPage',
+    name: 'TelosCloudRedirectPage',
     components: {
         NavegationBar,
     },
@@ -34,9 +33,14 @@ export default defineComponent({
             googleOneTap: {
                 appId: '639241197544-kcubenhmti6u7ef3uj360n2lcl5cmn8c.apps.googleusercontent.com',
                 buttonId: 'google_btn',
+            },
+            accountCreation: {
+                // rpcEndpoint: 'https://mainnet.telos.net', // your own rpc endpoint
+                // clientId: 'your-client-id', // your own client id registered in our service whitelist
+                allowRedirect: true,
             }
         });
-        
+
         // Handle login and logout events --
         telos.events.onLogin.subscribe(() => {
             userAccount.value = telos.userAccount;
@@ -130,7 +134,7 @@ export default defineComponent({
         
             <template v-if="!isLogged">
                 <div class="p-telos-cloud__welcome-card">
-                    <h1 class="p-telos-cloud__welcome-title">Cloud Login for Telos Zero</h1>
+                    <h1 class="p-telos-cloud__welcome-title">Cloud Login for Telos Zero (Redirect version)</h1>
                     <div class="c-login-buttons__google-btn" id="google_btn" data-client_id="${googleCtrl.clientId}">loading...</div>
                 </div>
             </template>

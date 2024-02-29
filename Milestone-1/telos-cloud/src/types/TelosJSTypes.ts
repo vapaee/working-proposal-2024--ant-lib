@@ -16,6 +16,22 @@ export interface TelosCloudOptions {
         appId: string,
         buttonId?: string,
         config?: { theme: string, size: string },
+    },
+    // accountCreation: {
+    //     // rpcEndpoint: 'https://mainnet.telos.net', // your own rpc endpoint
+    //     // clientId: 'your-client-id', // your own client id registered in our service whitelist
+    //     allowRedirect: true,
+    // }
+    accountCreation?: {
+        // your own rpc endpoint
+        rpcEndpoint?: string, 
+
+        // your own client id registered in our service whitelist
+        clientId?: string, 
+
+        // if allowRedirect, the user will be redirected to the account creation page if the account does not exist
+        // after the account is created, the user will be redirected back to the original page and autologin will be performed
+        allowRedirect?: boolean, 
     }
 }
 
@@ -25,3 +41,4 @@ export interface TelosCloudLoggedUser {
     email: string;
     keys: string[];
 }
+

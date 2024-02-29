@@ -1,6 +1,6 @@
 {
   "name": "@vapaee/telos-cloud",
-  "version": "0.9.0",
+  "version": "0.9.14",
   "description": "Telos Zero Cloud Login",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,8 @@
     "copy-version": "node scripts/copy_version.js",
     "build": "yarn copy-version; tsc",
     "test": "jest",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "dev": "tsc -w"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",

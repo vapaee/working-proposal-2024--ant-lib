@@ -9,6 +9,7 @@ export interface MetakeepUALOptions {
     appId: string;
     appName: string;
     accountCreateAPI?: string;
+    accountCreateCallback?: () => Promise<string>;
     reasonCallback?: (transaction: any) => string;
 }
 export interface MetakeepData {
@@ -50,6 +51,10 @@ export declare abstract class Authenticator {
     abstract requiresGetKeyConfirmation(): boolean;
     abstract getName(): string;
 }
+export interface CreateAccountCallBack {
+    email: string;
+    publicKey: string;
+}
 export declare class MetakeepAuthenticator extends Authenticator {
     private chainId;
     private endpoint;
@@ -59,10 +64,12 @@ export declare class MetakeepAuthenticator extends Authenticator {
     private userCredentials;
     private accountSelector;
     private accountNameSelector;
+    private accountCreateCallback?;
     constructor(chains: Chain[], options: MetakeepUALOptions);
     resetAccountSelector(): void;
     setAccountSelector(accountSelector: MetakeepAccountSelector): void;
     setAccountNameSelector(accountNameSelector: MetakeepNameAccountSelector): void;
+    setAccountCreateCallback(callback: (credentials: CreateAccountCallBack) => Promise<string>): void;
     saveCache(): void;
     init(): Promise<void>;
     setUserCredentials(credentials: UserCredentials): void;

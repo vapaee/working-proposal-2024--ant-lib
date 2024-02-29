@@ -21,6 +21,7 @@ export interface MetakeepUALOptions {
     appId: string;
     appName: string;
     accountCreateAPI?: string;
+    accountCreateCallback?: () => Promise<string>;
     reasonCallback?: (transaction: any) => string;
 }
 let metakeep: MetaKeep | null = null;
@@ -81,6 +82,10 @@ export abstract class Authenticator {
 }
 // ------------------------------------------------------
 
+export interface CreateAccountCallBack {
+    email:string,
+    publicKey:string
+}
 
 
 export class MetakeepAuthenticator extends Authenticator {
@@ -94,6 +99,8 @@ export class MetakeepAuthenticator extends Authenticator {
     private accountSelector: MetakeepAccountSelector = metakeepDefaultAccountSelector;
     private accountNameSelector: MetakeepNameAccountSelector = metakeepDefaultAccountNameSelector;
 
+    private accountCreateCallback?: (credentials: CreateAccountCallBack) => Promise<string>;
+    
     constructor(chains: Chain[], options: MetakeepUALOptions) {
         super(chains, options);
         console.log('MetakeepAuthenticator.constructor()');
@@ -124,6 +131,10 @@ export class MetakeepAuthenticator extends Authenticator {
 
     setAccountNameSelector(accountNameSelector: MetakeepNameAccountSelector) {
         this.accountNameSelector = accountNameSelector;
+    }
+
+    setAccountCreateCallback(callback: (credentials: CreateAccountCallBack) => Promise<string>) {
+        this.accountCreateCallback = callback;
     }
 
     saveCache() {
@@ -224,15 +235,22 @@ export class MetakeepAuthenticator extends Authenticator {
     async createAccount(publicKey: string): Promise<string> {
         console.log('MetakeepAuthenticator.createAccount()');
         const suggestedName = await this.accountNameSelector.selectAccountName();
-        if (!this.accountCreateAPI) {
-            throw new Error('accountCreateAPI');
+        if (this.accountCreateAPI) {
+            return axios.post(this.accountCreateAPI, {
+                ownerKey: publicKey,
+                activeKey: publicKey,
+                jwt: this.userCredentials.jwt,
+                suggestedName: suggestedName,
+            }).then(response => response.data.accountName);
+        } else if(this.accountCreateCallback) {
+            const email = this.userCredentials.email;
+            return this.accountCreateCallback({
+                publicKey,
+                email,
+            });
+        } else {
+            throw new Error('No account creation method. Enable redirect or provide a callback');
         }
-        return axios.post(this.accountCreateAPI, {
-            ownerKey: publicKey,
-            activeKey: publicKey,
-            jwt: this.userCredentials.jwt,
-            suggestedName: suggestedName,
-        }).then(response => response.data.accountName);
     }
 
     resolveAccountName() {

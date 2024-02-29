@@ -20,6 +20,11 @@ export interface TelosCloudOptions {
             size: string;
         };
     };
+    accountCreation?: {
+        rpcEndpoint?: string;
+        clientId?: string;
+        allowRedirect?: boolean;
+    };
 }
 export interface TelosCloudLoggedUser {
     account: string;

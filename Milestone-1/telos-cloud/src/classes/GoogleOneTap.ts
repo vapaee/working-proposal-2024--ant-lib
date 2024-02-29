@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export interface GoogleCredentials {
     email: string;
     jwt: string;
+    account?: string;
 }
 
 interface GoogleOneTap {

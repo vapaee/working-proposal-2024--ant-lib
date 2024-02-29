@@ -33,9 +33,6 @@ class TelosCloud {
         console.log("TelosCloud.checkAutoLogin()");
         TelosCloudInstance_1.telosCloud.checkAutoLogin();
     }
-    // async login(): Promise<string> {
-    //     return telosCloud.login();
-    // }
     reset() {
         console.log("TelosCloud.reset()");
         TelosCloudInstance_1.telosCloud.reset();

@@ -41,7 +41,6 @@ class Authenticator {
     }
 }
 exports.Authenticator = Authenticator;
-// ------------------------------------------------------
 class MetakeepAuthenticator extends Authenticator {
     constructor(chains, options) {
         var _a;
@@ -123,6 +122,9 @@ class MetakeepAuthenticator extends Authenticator {
     }
     setAccountNameSelector(accountNameSelector) {
         this.accountNameSelector = accountNameSelector;
+    }
+    setAccountCreateCallback(callback) {
+        this.accountCreateCallback = callback;
     }
     saveCache() {
         MetakeepCache_1.metakeepCache.saveCache();
@@ -214,15 +216,24 @@ class MetakeepAuthenticator extends Authenticator {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('MetakeepAuthenticator.createAccount()');
             const suggestedName = yield this.accountNameSelector.selectAccountName();
-            if (!this.accountCreateAPI) {
-                throw new Error('accountCreateAPI');
+            if (this.accountCreateAPI) {
+                return axios_1.default.post(this.accountCreateAPI, {
+                    ownerKey: publicKey,
+                    activeKey: publicKey,
+                    jwt: this.userCredentials.jwt,
+                    suggestedName: suggestedName,
+                }).then(response => response.data.accountName);
             }
-            return axios_1.default.post(this.accountCreateAPI, {
-                ownerKey: publicKey,
-                activeKey: publicKey,
-                jwt: this.userCredentials.jwt,
-                suggestedName: suggestedName,
-            }).then(response => response.data.accountName);
+            else if (this.accountCreateCallback) {
+                const email = this.userCredentials.email;
+                return this.accountCreateCallback({
+                    publicKey,
+                    email,
+                });
+            }
+            else {
+                throw new Error('No account creation method. Enable redirect or provide a callback');
+            }
         });
     }
     resolveAccountName() {
